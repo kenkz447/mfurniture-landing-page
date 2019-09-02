@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:200,400,500,700");
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap');
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css");
+
+@import "./styles/bootstrap/bootstrap.scss";
+@import "./styles/utilities.scss";
+
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+html {
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+
+a {
+    &.active {
+        color: var(--primary) !important;
+    }
+}
+
+.font-AbrilFatface {
+    font-family: 'Abril Fatface', cursive;
+}
+
+.container {
+    &-small {
+        max-width: 440px !important;
+    }
+
+    &-medium {
+        max-width: 768px !important;
+    }
+}
+
+.display {
+    &-none {
+        display: none;
+    }
+
+    &-flex {
+        display: flex;
+    }
+}
+
+.flex-direction {
+    &-column {
+        flex-direction: column;
+    }
+
+    &-row-reverse {
+        flex-direction: row-reverse;
+    }
+}
+
+.font-size {
+    &-large {
+        font-size: larger;
+    }
+}
+
+.first-char-capitalize {
+    display: inline-block;
+
+    &::first-letter {
+        text-transform: capitalize;
+    }
+}
+
+.horizontal-scroll {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
+.min-height-inherit {
+    min-height: inherit;
+}
+
+.hidden-scrollbar {
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
