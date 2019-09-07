@@ -1,38 +1,59 @@
-import { RootContext } from 'qoobee';
 import * as React from 'react';
 import { Route, Router, Switch } from 'react-router';
 
 import { PageLoading } from '@/components';
-import { WithDomainContext } from '@/domain';
+import { BaseComponent } from '@/domain';
 import { DefaultLayout } from '@/layout';
+import { MobileLayout } from '@/layout/MobileLayout';
 
-const MainRoutes = React.lazy(() => import('./main'));
+const DesktopRoutes = React.lazy(() => import('./desktop'));
+const MobileRoutes = React.lazy(() => import('./mobile'));
 
-export class RouterRoot extends React.PureComponent {
-    public static readonly contextType = RootContext;
-    public readonly context!: WithDomainContext;
+export class RouterRoot extends BaseComponent {
 
-    private readonly mainRouteComponent = () => {
-        return (
-            <DefaultLayout>
-                <React.Suspense fallback={<PageLoading />}>
-                    <MainRoutes />
-                </React.Suspense>
-            </DefaultLayout>
-        );
-    }
-
-    public render() {
+    private readonly renderDesktopRouter = () => {
         const { history } = this.context;
 
         return (
             <Router history={history}>
                 <Switch>
                     <Route>
-                        {this.mainRouteComponent}
+                        {() => (
+                            <DefaultLayout>
+                                <React.Suspense fallback={<PageLoading />}>
+                                    <DesktopRoutes />
+                                </React.Suspense>
+                            </DefaultLayout>
+                        )}
                     </Route>
                 </Switch>
             </Router>
         );
+    }
+
+    private readonly renderMobileRouter = () => {
+        const { history } = this.context;
+
+        return (
+            <Router history={history}>
+                <Switch>
+                    <Route>
+                        {() => (
+                            <MobileLayout>
+                                <React.Suspense fallback={<PageLoading />}>
+                                    <MobileRoutes />
+                                </React.Suspense>
+                            </MobileLayout>
+                        )}
+                    </Route>
+                </Switch>
+            </Router>
+        );
+    }
+
+    public render() {
+        return this.isSmallDevice
+            ? this.renderMobileRouter()
+            : this.renderDesktopRouter();
     }
 }

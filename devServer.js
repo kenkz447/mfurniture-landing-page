@@ -17,9 +17,12 @@ function run(port) {
         host: defaultHost,
         port: port,
         defineOptions: {
-            FILE_HOST: JSON.stringify('http://localhost:1337'),
-            // API_ENTRY: JSON.stringify('http://admin.mfurniture.vn'),
-            API_ENTRY: JSON.stringify('http://localhost:1337'),
+            // FILE_HOST: JSON.stringify('http://localhost:1337'),
+            // API_ENTRY: JSON.stringify('http://localhost:1337'),
+
+            FILE_HOST: JSON.stringify('https://admin.mfurniture.vn'),
+            API_ENTRY: JSON.stringify('https://admin.mfurniture.vn'),
+
             SUB_ENV: JSON.stringify('dev')
         }
     })

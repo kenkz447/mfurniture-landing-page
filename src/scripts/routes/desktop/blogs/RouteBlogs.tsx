@@ -9,7 +9,7 @@ import {
     PageHeader,
     SlideUp
 } from '@/components';
-import { NEWS_URL } from '@/configs';
+import { NEWS_DETAIL_URL } from '@/configs';
 import { AppPageProps, BasePageComponent, policies } from '@/domain';
 
 import { BlogList } from './containers';
@@ -22,7 +22,7 @@ type RouteBlogsProps = AppPageProps<{ readonly slug: string }>;
 
 export class RouteBlogs extends BasePageComponent<RouteBlogsProps> {
     public static readonly routeInfo: RouteInfo = {
-        path: NEWS_URL,
+        path: NEWS_DETAIL_URL,
         title: 'News',
         exact: true,
         policies: [policies.locationAllowed]

@@ -4,7 +4,7 @@ import { Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
 
 import { Img } from '@/components/domain';
-import { NEWS_URL } from '@/configs';
+import { NEWS_DETAIL_URL } from '@/configs';
 import { BaseComponent, markdownToHTML } from '@/domain';
 import { formatDate, replaceRoutePath } from '@/utilities';
 
@@ -83,7 +83,7 @@ export class BlogList extends BaseComponent<BlogListProps> {
                     return (
                         <div key={blog.id} id={blog.slug} className="blogs-item-wrapper">
                             <Link
-                                to={replaceRoutePath(NEWS_URL, blog)}
+                                to={replaceRoutePath(NEWS_DETAIL_URL, blog)}
                                 className={this.classNames('blogs-item', { active: currentSlug === blog.slug })}
                             >
                                 <div

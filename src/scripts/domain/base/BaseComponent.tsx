@@ -10,6 +10,8 @@ export class BaseComponent<P = {}, S = {}> extends React.PureComponent<P, S> {
     public readonly classNames = classNames;
     
     public get isSmallDevice() {
-        return this.context.currentBreakpoint === 'sm';
+        const { currentBreakpoint } = this.context;
+
+        return  ['sm', 'md'].includes(currentBreakpoint);
     }
 }

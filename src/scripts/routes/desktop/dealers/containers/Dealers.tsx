@@ -34,7 +34,18 @@ const DealersWrapper = styled.div`
         background-position: center;
         text-align: center;
         color: #fff;
-        height: 428px;
+        min-height: 428px;
+    }
+
+    @media screen and (max-width: 1200px) {
+        .dealers-city {
+            font-size: 20px;
+        }
+
+        .dealers-list {
+            font-weight: 400;
+            min-height: 459px;
+        }
     }
 `;
 

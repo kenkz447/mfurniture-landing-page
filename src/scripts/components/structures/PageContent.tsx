@@ -18,3 +18,19 @@ export const PageContent = styled.div`
         }
     }
 `;
+
+export const MobilePageContent = styled.div`
+    position: relative;
+
+    &.one-column {
+        #pageHeader {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            z-index: 1;
+        }
+        #pageHeader, #pageFooter {
+            padding-right: 600px;
+        }
+    }
+`;

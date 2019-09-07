@@ -23,6 +23,26 @@ const PageFooterWrapper = styled.footer`
             margin-right: 6px;
         }
     }
+
+    @media screen and (max-width: 1200px) {
+        height: auto;
+        flex-direction: column;
+        padding: 24px;
+        align-items: unset;
+
+        .row > * {
+            padding: 0;
+        }
+
+        .fa {
+            display: inline-block;
+            width: 10px;
+        }
+
+        .footer-copy-right {
+            margin-bottom: 24px;
+        }
+    }
 `;
 
 interface PageFooterProps {
@@ -33,21 +53,21 @@ export class PageFooter extends React.PureComponent<PageFooterProps> {
         return (
             <PageFooterWrapper id="pageFooter">
                 <div className="footer-copy-right">
-                &copy; Mfurniture.vn.2019
+                    &copy; Mfurniture.vn.2019
                 </div>
                 <div className="footer-contact-info">
                     <Container>
                         <Row>
-                            <Col xs={6}>
+                            <Col xl={6}>
                                 <i className="fa fa-mobile" /> <span>(084) 985-897-788</span>
                             </Col>
-                            <Col xs={6}>
+                            <Col xl={6}>
                                 <i className="fa fa-envelope-o" /> <span>INFO@MFURNITURE.VN</span>
                             </Col>
-                            <Col xs={6}>
+                            <Col xl={6}>
                                 <i className="fa fa-map-marker" /> <span>19 ABC DEFF, HCM, VIETNAM</span>
                             </Col>
-                            <Col xs={6}>
+                            <Col xl={6}>
                                 <i className="fa fa-globe" /> <span>WWW.MFURNITURE.VN</span>
                             </Col>
                         </Row>

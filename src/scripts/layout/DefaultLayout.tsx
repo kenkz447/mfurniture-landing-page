@@ -2,8 +2,7 @@ import './DefaultLayout.scss';
 
 import * as React from 'react';
 
-import { PageWrapper } from '@/components';
-import { PageSider } from '@/components/structures/PageSider';
+import { PageSider, PageWrapper } from '@/components';
 import { BaseComponent } from '@/domain';
 
 interface DefaultLayoutProps {

@@ -35,6 +35,8 @@ const FeatureProductSliderWrapper = styled.div`
         bottom: unset;
         text-align: unset;
         top: 20%;
+        display: block!important;
+
         > * {
             font-weight: bold;
             font-size: 22px;
@@ -69,6 +71,25 @@ const FeatureProductSliderWrapper = styled.div`
             background-image: url("/static/assets/next.png");
             height: 30px;
             width: 15px;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .carousel-caption {
+            left: 24px;
+        }
+
+        .carousel-control-prev, .carousel-control-next {
+            bottom: 5%;
+        }
+
+        
+        .carousel-control-prev {
+            left: 70%;
+        }
+
+        .carousel-control-next {
+            right: 10%;
         }
     }
 `;
