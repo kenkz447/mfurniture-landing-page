@@ -1,1 +1,2 @@
-export * from './RouteCollection';
+export * from './collection-detail';
+export * from './collection';

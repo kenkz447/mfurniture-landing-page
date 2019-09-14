@@ -50,6 +50,12 @@ const BlogListWrapper = styled.div`
             font-weight: bold;
             letter-spacing: .3em;
         }
+
+        @media screen and (min-width: 1600px) {
+            flex-basis: 800px;
+            min-width: 800px;
+            max-width: 800px;
+        }
     }
 
     .blogs-item-content-wrapper {

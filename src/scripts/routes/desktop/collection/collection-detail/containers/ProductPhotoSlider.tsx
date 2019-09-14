@@ -1,19 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import {
-    Carousel,
-    CarouselCaption,
-    CarouselControl,
-    CarouselItem
-} from 'reactstrap';
+import { Carousel, CarouselControl, CarouselItem } from 'reactstrap';
 import styled from 'styled-components';
 
 import { Img } from '@/components/domain';
-import { COLLECTION_DETAIL_URL } from '@/configs';
 import { Product } from '@/restful';
-import { replaceRoutePath } from '@/utilities';
 
-const FeatureProductSliderWrapper = styled.div`
+const ProductPhotoSliderSliderWrapper = styled.div`
     height: inherit;
     min-height: inherit;
     max-height: inherit;
@@ -94,25 +86,26 @@ const FeatureProductSliderWrapper = styled.div`
     }
 `;
 
-interface FeatureProductSliderProps {
-    readonly products: Product[];
+interface ProductPhotoSliderSliderProps {
+    readonly product: Product;
     readonly onChange?: (index: number) => void;
     readonly interval?: number | false;
-    readonly currentIndex?: number;
 }
 
-interface FeatureProductSliderState {
+interface ProductPhotoSliderSliderState {
     readonly activeIndex: number;
 }
 
-export class FeatureProductSlider extends React.PureComponent<FeatureProductSliderProps, FeatureProductSliderState> {
+export class ProductPhotoSliderSlider extends React.PureComponent<
+    ProductPhotoSliderSliderProps,
+    ProductPhotoSliderSliderState> {
     private _animating = false;
 
-    constructor(props: FeatureProductSliderProps) {
+    constructor(props: ProductPhotoSliderSliderProps) {
         super(props);
 
         this.state = {
-            activeIndex: props.currentIndex || 0
+            activeIndex: 0
         };
     }
 
@@ -125,28 +118,28 @@ export class FeatureProductSlider extends React.PureComponent<FeatureProductSlid
     }
 
     private readonly next = () => {
-        const { products } = this.props;
+        const { product } = this.props;
 
         if (this._animating) {
             return;
         }
 
-        const nextIndex = this.state.activeIndex === products.length - 1 ? 0 : this.state.activeIndex + 1;
+        const nextIndex = this.state.activeIndex === product.photos.length - 1 ? 0 : this.state.activeIndex + 1;
         this.setState({ activeIndex: nextIndex });
     }
 
     private readonly previous = () => {
-        const { products } = this.props;
+        const { product } = this.props;
 
         if (this._animating) {
             return;
         }
 
-        const nextIndex = this.state.activeIndex === 0 ? products.length - 1 : this.state.activeIndex - 1;
+        const nextIndex = this.state.activeIndex === 0 ? product.photos.length - 1 : this.state.activeIndex - 1;
         this.setState({ activeIndex: nextIndex });
     }
 
-    public componentDidUpdate(prevProps: FeatureProductSliderProps, prevState: FeatureProductSliderState) {
+    public componentDidUpdate(prevProps: ProductPhotoSliderSliderProps, prevState: ProductPhotoSliderSliderState) {
         const { onChange } = this.props;
         const { activeIndex } = this.state;
 
@@ -158,35 +151,25 @@ export class FeatureProductSlider extends React.PureComponent<FeatureProductSlid
     }
 
     public render() {
-        const { products, interval } = this.props;
+        const { product, interval } = this.props;
         const { activeIndex } = this.state;
 
-        const slides = products.map((product, index) => {
-            if (!product.thumbnail) {
-                return null;
-            }
+        const displayIndex = activeIndex + 1;
 
-            const displayIndex = index + 1;
-
+        const slides = product.photos.map((photo) => {
             return (
                 <CarouselItem
                     onExiting={this.onExiting}
                     onExited={this.onExited}
-                    key={product.thumbnail.url}
+                    key={photo.url}
                 >
-                    <Img className="carousel-item-img" file={product.thumbnail} />
-                    <Link to={replaceRoutePath(COLLECTION_DETAIL_URL, product)}>
-                        <CarouselCaption
-                            captionHeader={index > 9 ? String(displayIndex) : '0' + displayIndex}
-                            captionText={'/' + product.style}
-                        />
-                    </Link>
+                    <Img className="carousel-item-img" file={photo} />
                 </CarouselItem>
             );
         });
 
         return (
-            <FeatureProductSliderWrapper>
+            <ProductPhotoSliderSliderWrapper>
                 <Carousel
                     activeIndex={activeIndex}
                     next={this.next}
@@ -197,7 +180,11 @@ export class FeatureProductSlider extends React.PureComponent<FeatureProductSlid
                     <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                     <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
                 </Carousel>
-            </FeatureProductSliderWrapper>
+                <div className="carousel-caption">
+                    <h3>{displayIndex > 9 ? String(displayIndex) : '0' + displayIndex}</h3>
+                    <p>/{product.style}</p>
+                </div>
+            </ProductPhotoSliderSliderWrapper>
         );
     }
 }

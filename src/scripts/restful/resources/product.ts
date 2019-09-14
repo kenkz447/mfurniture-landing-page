@@ -13,6 +13,7 @@ export interface Product {
     readonly thumbnail: UploadedFile;
     readonly productType: 'sofa' | 'chair' | 'table';
     readonly isFeature: boolean;
+    readonly photos: UploadedFile[];
 }
 
 export const productResourceType = new ResourceType<Product>({

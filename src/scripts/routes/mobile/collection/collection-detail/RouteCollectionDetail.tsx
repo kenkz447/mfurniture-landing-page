@@ -1,20 +1,20 @@
 import { RouteInfo } from 'qoobee';
 import * as React from 'react';
-import { Redirect } from 'react-router';
 import styled from 'styled-components';
 
 import { MobilePageContent, SlideUp } from '@/components';
-import { COLLECTION_URL } from '@/configs';
+import { COLLECTION_DETAIL_URL } from '@/configs';
 import {
     AppPageProps,
     BasePageComponent,
     markdownToHTML,
     policies
 } from '@/domain';
-import { FeatureProductSlider } from '@/routes/desktop/home/containers';
-import { replaceRoutePath } from '@/utilities';
+import {
+    ProductPhotoSliderSlider
+} from '@/routes/desktop/collection/collection-detail/containers';
 
-const RouteCollectionContent = styled.div`
+const RouteCollectionDetailContent = styled.div`
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -30,6 +30,7 @@ const RouteCollectionContent = styled.div`
         text-align: left;
         font-family: 'Abril Fatface', cursive;
     }
+
     h2 {
         font-size: 15px;
         font-weight: 700;
@@ -43,23 +44,23 @@ const RouteCollectionContent = styled.div`
     }
 `;
 
-const RouteCollectionSlider = styled.div`
+const RouteCollectionDetailSlider = styled.div`
     background: lightgray;
     position: relative;
 `;
 
-type RouteCollectionProps = AppPageProps<{ readonly productType: string; readonly slug?: string }>;
+type RouteCollectionDetailProps = AppPageProps<{ readonly productType: string; readonly slug?: string }>;
 
-export class RouteCollection extends BasePageComponent<RouteCollectionProps> {
+export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDetailProps> {
     public static readonly routeInfo: RouteInfo = {
-        path: COLLECTION_URL,
+        path: COLLECTION_DETAIL_URL,
         title: 'Collection',
         exact: true,
         policies: [policies.locationAllowed]
     };
 
     public render() {
-        const { products, history } = this.context;
+        const { products } = this.context;
         const { match: { params } } = this.props;
 
         const productsByType = products.filter(o => o.productType === params.productType);
@@ -73,36 +74,22 @@ export class RouteCollection extends BasePageComponent<RouteCollectionProps> {
             if (!defaultProduct) {
                 return 'No data found!';
             }
-
-            return <Redirect to={replaceRoutePath(COLLECTION_URL, defaultProduct)} />;
         }
 
         return (
             <MobilePageContent>
-                <RouteCollectionSlider className="mobile-content-full-screen">
-                    <FeatureProductSlider
-                        products={productsByType}
-                        interval={false}
-                        currentIndex={currentProductIndex}
-                        onChange={(index) => {
-                            const nextProduct = productsByType[index];
-                            if (!nextProduct) {
-                                return;
-                            }
-
-                            history.replace(
-                                replaceRoutePath(COLLECTION_URL, nextProduct)
-                            );
-                        }}
+                <RouteCollectionDetailSlider className="mobile-content-full-screen">
+                    <ProductPhotoSliderSlider
+                        product={currentProduct}
                     />
-                </RouteCollectionSlider>
-                <RouteCollectionContent>
+                </RouteCollectionDetailSlider>
+                <RouteCollectionDetailContent>
                     <SlideUp key={currentProductIndex}>
                         <h2>{currentProduct.name}</h2>
                         <p>By {currentProduct.by}</p>
                         <article dangerouslySetInnerHTML={{ __html: markdownToHTML(currentProduct.content) }} />
                     </SlideUp>
-                </RouteCollectionContent>
+                </RouteCollectionDetailContent>
             </MobilePageContent>
         );
     }

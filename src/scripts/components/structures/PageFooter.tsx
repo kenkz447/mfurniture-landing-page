@@ -27,7 +27,7 @@ const PageFooterWrapper = styled.footer`
     @media screen and (max-width: 1200px) {
         height: auto;
         flex-direction: column;
-        padding: 24px;
+        padding: 24px 24px 64px 24px;
         align-items: unset;
 
         .row > * {

@@ -6,7 +6,7 @@ import { NotFoundPage } from '@/components';
 
 import { RouteAbout } from './about';
 import { RouteBlogs } from './blogs';
-import { RouteCollection } from './collection';
+import { RouteCollection, RouteCollectionDetail } from './collection';
 import { RouteContact } from './contact';
 import { RouteDealers } from './dealers';
 import { RouteHome } from './home';
@@ -17,7 +17,8 @@ export const routes = routeFrom([
     RouteDealers,
     RouteContact,
     RouteBlogs,
-    RouteCollection
+    RouteCollection,
+    RouteCollectionDetail
 ]);
 
 export default () => (

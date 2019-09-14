@@ -15,6 +15,10 @@ export const PageContent = styled.div`
         }
         #pageHeader, #pageFooter {
             padding-right: 600px;
+
+            @media screen and (min-width: 1600px) {
+                padding-right: 800px;
+            }
         }
     }
 `;
@@ -28,9 +32,6 @@ export const MobilePageContent = styled.div`
             top: 0;
             background: #fff;
             z-index: 1;
-        }
-        #pageHeader, #pageFooter {
-            padding-right: 600px;
         }
     }
 `;
