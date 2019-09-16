@@ -16,6 +16,20 @@ html {
     overflow: hidden;
 }
 
+article {
+    p {
+        img {
+            margin: 0 auto;
+            display: block;
+            max-width: 100%;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
 a {
     &.active {
         color: var(--primary) !important;
@@ -89,6 +103,7 @@ a {
 
 .hidden-scrollbar {
     scrollbar-width: none;
+
     ::-webkit-scrollbar {
         display: none;
     }
@@ -96,4 +111,10 @@ a {
 
 .mobile-content-full-screen {
     height: calc(100vh - 64px);
+}
+
+.carousel-control-prev, .carousel-control-next {
+    &.disabled {
+        opacity: .5!important;
+    }
 }

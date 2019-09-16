@@ -3,7 +3,7 @@ import { WithContextProps } from 'react-context-service';
 import { RouteComponentProps } from 'react-router';
 import { ModalProps } from 'reactstrap';
 
-import { Blog, Dealer, Product } from '@/restful';
+import { Blog, Dealer, Page, Product, Setting } from '@/restful';
 
 import { AuthClient } from './AuthClient';
 
@@ -20,6 +20,8 @@ interface DataContext {
     readonly products: Product[];
     readonly dealers: Dealer[];
     readonly blogs: Blog[];
+    readonly pages: Page[];
+    readonly settings: Setting[];
 }
 
 interface DomainContext extends IdentyContext, DataContext, AppCoreContext<{}> {

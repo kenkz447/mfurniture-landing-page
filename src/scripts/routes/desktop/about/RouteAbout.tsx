@@ -12,7 +12,12 @@ import {
     SlideUp
 } from '@/components';
 import { ABOUT_URL } from '@/configs';
-import { AppPageProps, BasePageComponent, policies } from '@/domain';
+import {
+    AppPageProps,
+    BasePageComponent,
+    markdownToHTML,
+    policies
+} from '@/domain';
 
 const AboutContent = styled.div`
     flex-grow: 1;
@@ -45,6 +50,10 @@ export class RouteAbout extends BasePageComponent<AppPageProps> {
     };
 
     public render() {
+        const { pages } = this.context;
+
+        const aboutPage = pages.find(o => o.slug === 'about');
+
         return (
             <PageContent>
                 <PageContentCol1>
@@ -55,19 +64,15 @@ export class RouteAbout extends BasePageComponent<AppPageProps> {
                 <PageContentCol2>
                     <AboutSlider>
                         <SlideUp className="h-100 display-flex flex-direction-column justify-content-end">
-                            <div className="text-center mb-5">
-                                <img className="logo-simple" src="/static/logo-simple.png"  alt="[M] logo"/>
-                            </div>
-                            <p className="mb-5">
-                                In cursus vestibulum nulla eget sodales. Praesent vel malesuada lorem. Phasellus pharetra sed eros at finibus. Vestibulum mollis fringilla diam vitae hendrerit. Quisque nulla arcu, cursus vitae finibus in, luctus sit amet diam.
-                            </p>
-                            <div>
-                                <img
-                                    className="w-100"
-                                    src="/static/assets/about-detail.png"
-                                    alt="detail image"
-                                />
-                            </div>
+                            {
+                                aboutPage
+                                    ? (
+                                        <article
+                                            dangerouslySetInnerHTML={{ __html: markdownToHTML(aboutPage.content) }}
+                                        />
+                                    )
+                                    : 'Not found!'
+                            }
                         </SlideUp>
                     </AboutSlider>
                 </PageContentCol2>

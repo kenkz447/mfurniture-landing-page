@@ -126,8 +126,9 @@ export class FeatureProductSlider extends React.PureComponent<FeatureProductSlid
 
     private readonly next = () => {
         const { products } = this.props;
+        const { activeIndex } = this.state;
 
-        if (this._animating) {
+        if (this._animating || activeIndex === products.length - 1) {
             return;
         }
 
@@ -137,11 +138,12 @@ export class FeatureProductSlider extends React.PureComponent<FeatureProductSlid
 
     private readonly previous = () => {
         const { products } = this.props;
+        const { activeIndex } = this.state;
 
-        if (this._animating) {
+        if (this._animating || activeIndex === 0) {
             return;
         }
-
+        
         const nextIndex = this.state.activeIndex === 0 ? products.length - 1 : this.state.activeIndex - 1;
         this.setState({ activeIndex: nextIndex });
     }
@@ -194,8 +196,18 @@ export class FeatureProductSlider extends React.PureComponent<FeatureProductSlid
                     interval={interval}
                 >
                     {slides}
-                    <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-                    <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+                    <CarouselControl
+                        direction="prev"
+                        directionText="Previous"
+                        onClickHandler={this.previous}
+                        className={activeIndex === 0 ? 'disabled' : ''}
+                    />
+                    <CarouselControl
+                        direction="next"
+                        directionText="Next"
+                        onClickHandler={this.next}
+                        className={activeIndex === products.length - 1 ? 'disabled' : ''}
+                    />
                 </Carousel>
             </FeatureProductSliderWrapper>
         );

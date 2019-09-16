@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const MobilePageHeaderWrapper = styled.div`
@@ -45,7 +46,9 @@ export class MobilePageHeader extends React.PureComponent<MobilePageHeaderProps>
                     <i className="fa fa-bars" />
                 </div>
                 <div className="header-logo">
-                    <img src="/static/logo.png" alt="Logo" />
+                    <Link to="/">
+                        <img src="/static/logo.png" alt="Logo" />
+                    </Link>
                 </div>
                 <div className="header-button" />
             </MobilePageHeaderWrapper>

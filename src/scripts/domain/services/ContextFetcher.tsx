@@ -1,4 +1,11 @@
-import { blogResources, productResources, request } from '@/restful';
+import {
+    blogResources,
+    dealerResources,
+    pageResources,
+    productResources,
+    request,
+    settingResources
+} from '@/restful';
 
 import { BaseComponent } from '../base';
 
@@ -22,7 +29,7 @@ export class ContextFetcher extends BaseComponent<{}, ContextFetcherState> {
     private readonly fetchContext = async () => {
         const { setContext } = this.context;
 
-        const [products, blogs] = await Promise.all([
+        const [products, blogs, dealers, pages, settings] = await Promise.all([
             request(
                 productResources.findAll,
                 [
@@ -36,67 +43,23 @@ export class ContextFetcher extends BaseComponent<{}, ContextFetcherState> {
                     { type: 'query', parameter: 'published', value: true },
                     { type: 'query', parameter: '_sort', value: '_id:desc' }
                 ]
-            )
+            ),
+            request(
+                dealerResources.findAll,
+                [
+                    { type: 'query', parameter: '_sort', value: '_id:desc' }
+                ]
+            ),
+            request(pageResources.findAll),
+            request(settingResources.findAll)
         ]);
 
         setContext({
-            products: products,
-            blogs: blogs,
-            dealers: [{
-                name: 'DICTRICT 1',
-                address: '20 Nguyễn Huệ',
-                email: 'info@mquan1.vn',
-                tel: '+84 38 25 69 42',
-                city: 'HCM'
-            }, {
-                name: 'DICTRICT 3',
-                address: '112 Nguyễn Thiện Thuật',
-                email: 'info@mquan3.vn',
-                tel: '+84 38 25 68 92',
-                city: 'HCM'
-            }, {
-                name: 'HOCMON',
-                address: '911 Nguyễn Văn Hưởng',
-                email: 'info@mhocmon.vn',
-                tel: '+84 38 25 33 33',
-                city: 'HCM'
-            }, {
-                name: 'DICTRICT 1',
-                address: '20 Nguyễn Huệ',
-                email: 'info@mquan1.vn',
-                tel: '+84 38 25 69 42',
-                city: 'DANANG'
-            }, {
-                name: 'DICTRICT 3',
-                address: '112 Nguyễn Thiện Thuật',
-                email: 'info@mquan3.vn',
-                tel: '+84 38 25 68 92',
-                city: 'DANANG'
-            }, {
-                name: 'HOCMON',
-                address: '911 Nguyễn Văn Hưởng',
-                email: 'info@mhocmon.vn',
-                tel: '+84 38 25 33 33',
-                city: 'DANANG'
-            }, {
-                name: 'DICTRICT 1',
-                address: '20 Nguyễn Huệ',
-                email: 'info@mquan1.vn',
-                tel: '+84 38 25 69 42',
-                city: 'HANOI'
-            }, {
-                name: 'DICTRICT 3',
-                address: '112 Nguyễn Thiện Thuật',
-                email: 'info@mquan3.vn',
-                tel: '+84 38 25 68 92',
-                city: 'HANOI'
-            }, {
-                name: 'HOCMON',
-                address: '911 Nguyễn Văn Hưởng',
-                email: 'info@mhocmon.vn',
-                tel: '+84 38 25 33 33',
-                city: 'HANOI'
-            }]
+            products,
+            blogs,
+            dealers,
+            pages,
+            settings
         });
 
         this.setState({

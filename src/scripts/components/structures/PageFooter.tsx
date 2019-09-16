@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
 
+import { BaseComponent } from '@/domain';
+
 const PageFooterWrapper = styled.footer`
     height: 98px;
     min-height: 98px;
@@ -48,27 +50,38 @@ const PageFooterWrapper = styled.footer`
 interface PageFooterProps {
 }
 
-export class PageFooter extends React.PureComponent<PageFooterProps> {
+export class PageFooter extends BaseComponent<PageFooterProps> {
+
     public render() {
+        const { settings } = this.context;
+
+        const phoneSetting = settings.find(o => o.key === 'CONTACT_PHONE');
+        const mailSetting = settings.find(o => o.key === 'CONTACT_EMAIL');
+        const addressSetting = settings.find(o => o.key === 'CONTACT_ADDRESS');
+
         return (
             <PageFooterWrapper id="pageFooter">
                 <div className="footer-copy-right">
-                    &copy; Mfurniture.vn.2019
+                    &copy; Mfurniture.vn.{(new Date).getFullYear()}
                 </div>
                 <div className="footer-contact-info">
                     <Container>
                         <Row>
                             <Col xl={6}>
-                                <i className="fa fa-mobile" /> <span>(084) 985-897-788</span>
+                                <i className="fa fa-mobile" />
+                                <span>{phoneSetting ? phoneSetting.value : '...'}</span>
                             </Col>
                             <Col xl={6}>
-                                <i className="fa fa-envelope-o" /> <span>INFO@MFURNITURE.VN</span>
+                                <i className="fa fa-envelope-o" />
+                                <span>{mailSetting ? mailSetting.value : '...'}</span>
                             </Col>
                             <Col xl={6}>
-                                <i className="fa fa-map-marker" /> <span>19 ABC DEFF, HCM, VIETNAM</span>
+                                <i className="fa fa-map-marker" />
+                                <span>{addressSetting ? addressSetting.value : '...'}</span>
                             </Col>
                             <Col xl={6}>
-                                <i className="fa fa-globe" /> <span>WWW.MFURNITURE.VN</span>
+                                <i className="fa fa-globe" />
+                                <span>WWW.MFURNITURE.VN</span>
                             </Col>
                         </Row>
                     </Container>

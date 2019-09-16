@@ -4,7 +4,12 @@ import styled from 'styled-components';
 
 import { MobilePageContent, SlideUp } from '@/components';
 import { CONTACT_URL } from '@/configs';
-import { AppPageProps, BasePageComponent, policies } from '@/domain';
+import {
+    AppPageProps,
+    BasePageComponent,
+    markdownToHTML,
+    policies
+} from '@/domain';
 
 const ContactContent = styled.div`
     flex-grow: 1;
@@ -36,32 +41,25 @@ export class RouteContact extends BasePageComponent<AppPageProps> {
     };
 
     public render() {
+
+        const { pages } = this.context;
+
+        const contactPage = pages.find(o => o.slug === 'contact');
+
         return (
             <MobilePageContent>
                 <ContactContent className="mobile-content-full-screen mb-5" />
                 <ContactSlider>
                     <SlideUp className="h-100 display-flex flex-direction-column justify-content-center">
-                        <h1 className="text-center mb-5">
-                            CONTACT
-                            </h1>
-                        <p className="mb-5">
-                            HO CHI MINH <br />
-                            M furniture company <br />
-                            189/8, Le Hong Phong <br />
-                            Tan Phuoc, Tan Binh Ward <br />
-                            Di An, Binh Duong <br />
-                            +84 0274 368 7000 <br />
-                            info@mfurniture.vn
-                            </p>
-                        <p className="mb-5">
-                            DA NANG <br />
-                            M furniture store <br />
-                            143 Phan Van Dinh <br />
-                            Hoa Khanh Bac Ward, <br />
-                            Lien Chieu, Da Nang <br />
-                            +84 0274 368 7000 <br />
-                            info@mfurniture.vn
-                            </p>
+                        {
+                            contactPage
+                                ? (
+                                    <article
+                                        dangerouslySetInnerHTML={{ __html: markdownToHTML(contactPage.content) }}
+                                    />
+                                )
+                                : 'Not found!'
+                        }
                     </SlideUp>
                 </ContactSlider>
             </MobilePageContent>

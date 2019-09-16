@@ -89,7 +89,6 @@ const ProductPhotoSliderSliderWrapper = styled.div`
 interface ProductPhotoSliderSliderProps {
     readonly product: Product;
     readonly onChange?: (index: number) => void;
-    readonly interval?: number | false;
 }
 
 interface ProductPhotoSliderSliderState {
@@ -119,8 +118,9 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
 
     private readonly next = () => {
         const { product } = this.props;
+        const { activeIndex } = this.state;
 
-        if (this._animating) {
+        if (this._animating || activeIndex === product.photos.length - 1) {
             return;
         }
 
@@ -130,8 +130,9 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
 
     private readonly previous = () => {
         const { product } = this.props;
+        const { activeIndex } = this.state;
 
-        if (this._animating) {
+        if (this._animating || activeIndex === 0) {
             return;
         }
 
@@ -151,7 +152,7 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
     }
 
     public render() {
-        const { product, interval } = this.props;
+        const { product } = this.props;
         const { activeIndex } = this.state;
 
         const displayIndex = activeIndex + 1;
@@ -174,11 +175,21 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
                     activeIndex={activeIndex}
                     next={this.next}
                     previous={this.previous}
-                    interval={interval}
+                    interval={false}
                 >
                     {slides}
-                    <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-                    <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+                    <CarouselControl
+                        direction="prev"
+                        directionText="Previous"
+                        onClickHandler={this.previous}
+                        className={displayIndex === 1 ? 'disabled' : ''}
+                    />
+                    <CarouselControl
+                        direction="next"
+                        directionText="Next"
+                        onClickHandler={this.next}
+                        className={displayIndex === product.photos.length ? 'disabled' : ''}
+                    />
                 </Carousel>
                 <div className="carousel-caption">
                     <h3>{displayIndex > 9 ? String(displayIndex) : '0' + displayIndex}</h3>

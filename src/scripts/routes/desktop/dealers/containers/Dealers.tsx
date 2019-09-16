@@ -91,17 +91,19 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
                 </div>
                 <div className="dealers-list pt-5">
                     <SlideUp key={city}>
-
-                        {dealersByCity.map(dealer => {
-                            return (
-                                <div key={dealer.name} className="mb-5">
-                                    <div className="h5 mb-3">{dealer.name}</div>
-                                    <div>{dealer.address}</div>
-                                    <div>{dealer.email}</div>
-                                    <div>{dealer.tel}</div>
-                                </div>
-                            );
-                        })}
+                        {dealersByCity.length
+                            ? dealersByCity.map(dealer => {
+                                return (
+                                    <div key={dealer.name} className="mb-5">
+                                        <div className="h5 mb-3">{dealer.name}</div>
+                                        <div>{dealer.address}</div>
+                                        <div>{dealer.email}</div>
+                                        <div>{dealer.tel}</div>
+                                    </div>
+                                );
+                            })
+                            : 'No data!'
+                        }
                     </SlideUp>
                 </div>
             </DealersWrapper>
