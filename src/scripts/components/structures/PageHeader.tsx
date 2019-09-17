@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { HOME_URL } from '@/configs';
@@ -29,6 +29,13 @@ const PageHeaderWrapper = styled.header`
             color: black;
         }
     }
+
+    .logo {
+        width: 150px;
+        img {
+            max-width: 100%;
+        }
+    }
 `;
 
 interface PageHeaderProps {
@@ -42,7 +49,9 @@ export class PageHeader extends BaseComponent<PageHeaderProps> {
         return (
             <PageHeaderWrapper id="pageHeader">
                 <div className="logo">
-                    <img src="/static/logo.png" alt="Logo" />
+                    <Link to="/">
+                        <img src="/static/logo.png" alt="Logo" />
+                    </Link>
                 </div>
                 <div id="headerMenu">
                     <ul className="header-menu">
