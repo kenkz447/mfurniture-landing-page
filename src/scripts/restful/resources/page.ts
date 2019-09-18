@@ -1,9 +1,12 @@
 import { Resource, ResourceType } from 'react-restful';
 
+import { UploadedFile } from './uploadedFile';
+
 export interface Page {
     readonly title: string;
     readonly slug: string;
     readonly content: string;
+    readonly cover?: UploadedFile;
 }
 
 export const pageResourceType = new ResourceType<Page>({

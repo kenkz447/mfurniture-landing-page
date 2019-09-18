@@ -12,7 +12,12 @@ import {
     SlideUp
 } from '@/components';
 import { HOME_URL } from '@/configs';
-import { AppPageProps, BasePageComponent, policies } from '@/domain';
+import {
+    AppPageProps,
+    BasePageComponent,
+    markdownToHTML,
+    policies
+} from '@/domain';
 
 import { FeatureProductSlider } from './containers';
 
@@ -26,6 +31,11 @@ const HomeContent = styled.div`
 
     h1 {
         font-size: 70px;
+        font-family: 'Abril Fatface', cursive;
+    }
+
+    p {
+        max-width: 400px;
     }
 `;
 
@@ -45,6 +55,9 @@ export class RouteHome extends BasePageComponent<AppPageProps> {
     };
 
     public render() {
+        const { pages } = this.context;
+        const homePage = pages.find(o => o.slug === 'home');
+
         const { products } = this.context;
 
         const featureProducts = products.filter(o => o.isFeature);
@@ -56,17 +69,16 @@ export class RouteHome extends BasePageComponent<AppPageProps> {
                     <HomeContent>
                         <SlideUp className="h-100 display-flex flex-direction-column">
                             <div>Collection No.01</div>
-                            <div className="display-flex flex-direction-column justify-content-center flex-grow-1">
-                                <h1 className="font-AbrilFatface">
-                                    Minimalistic <br />
-                                    Furniture
-                            </h1>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit, <br />
-                                    sed diam nonummy nibh euismod tincidunt ut laoreet <br />
-                                    dolore magna aliquam erat
-                            </p>
-                            </div>
+                            {
+                                homePage
+                                    ? (
+                                        <div
+                                            className="display-flex flex-direction-column justify-content-center flex-grow-1"
+                                            dangerouslySetInnerHTML={{ __html: markdownToHTML(homePage.content) }}
+                                        />
+                                    )
+                                    : 'Not found!'
+                            }
                             <Row>
                                 <Col xs={4}>
                                     <div><strong>01</strong></div>

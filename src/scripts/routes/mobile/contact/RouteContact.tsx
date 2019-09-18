@@ -21,7 +21,6 @@ const ContactContent = styled.div`
 `;
 
 const ContactSlider = styled.div`
-    height: 100vh;
     min-height: inherit;
     max-height: inherit;
     padding: 24px;
