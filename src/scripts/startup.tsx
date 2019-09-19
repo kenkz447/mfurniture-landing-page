@@ -12,7 +12,7 @@ import * as Sentry from '@sentry/browser';
 import { ErrorPage } from './components';
 import { defaultLanguage } from './configs';
 import { ContextFetcher, GlobalModal, Notifications, policies } from './domain';
-import { headerMenu, siderMenu, socialMenu } from './domain/menus';
+import { headerMenu, siderMenu } from './domain/menus';
 import { showAction } from './effects';
 import { RouterRoot } from './routes';
 
@@ -63,8 +63,7 @@ const rootProps: RootProps = {
         currentLanguage: localStorage.getItem('lang') || defaultLanguage,
         menus: {
             header: headerMenu,
-            sider: siderMenu,
-            social: socialMenu
+            sider: siderMenu
         }
     },
     SWRegistrationProps:
