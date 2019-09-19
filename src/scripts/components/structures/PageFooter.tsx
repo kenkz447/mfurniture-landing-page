@@ -16,7 +16,7 @@ const PageFooterWrapper = styled.footer`
         flex-grow: 1;
     }
     .footer-contact-info {
-        max-width: 400px;
+        max-width: 470px;
         line-height: 2.5em;
         font-size: 10px;
         i {
@@ -28,6 +28,7 @@ const PageFooterWrapper = styled.footer`
 
     @media screen and (max-width: 1200px) {
         height: auto;
+        min-height: 236px;
         flex-direction: column;
         padding: 24px 24px 64px 24px;
         align-items: unset;

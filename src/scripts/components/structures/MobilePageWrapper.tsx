@@ -8,6 +8,8 @@ const MobilePageWrapperDiv = styled.div`
     transition: all .5s;
     position: relative;
     background: #fff;
+    display: flex;
+    flex-direction: column;
 `;
 
 interface MobilePageWrapperProps extends React.HtmlHTMLAttributes<HTMLDivElement> {

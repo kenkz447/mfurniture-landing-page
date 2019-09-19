@@ -1,5 +1,6 @@
 import { RouteInfo } from 'qoobee';
 import * as React from 'react';
+import { Redirect } from 'react-router';
 import { Col, Row } from 'reactstrap';
 import styled from 'styled-components';
 
@@ -11,6 +12,7 @@ import {
     PageHeader,
     SlideUp
 } from '@/components';
+import { Img } from '@/components/domain';
 import { ABOUT_URL } from '@/configs';
 import {
     AppPageProps,
@@ -21,11 +23,17 @@ import {
 
 const AboutContent = styled.div`
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    background-image: url("/static/assets/about.png");
-    background-size: cover;
-    background-position: center;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    .cover {
+        width: auto;
+        height: 100%;
+        max-height: 100%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 `;
 
 const AboutSlider = styled.div`
@@ -54,11 +62,21 @@ export class RouteAbout extends BasePageComponent<AppPageProps> {
 
         const aboutPage = pages.find(o => o.slug === 'about');
 
+        if (!aboutPage) {
+            return <Redirect to="/not-found" />;
+        }
+
         return (
             <PageContent>
                 <PageContentCol1>
                     <PageHeader />
-                    <AboutContent />
+                    <AboutContent>
+                        <Img
+                            file={aboutPage.cover}
+                            className="cover"
+                            alt="about cover photo"
+                        />
+                    </AboutContent>
                     <PageFooter />
                 </PageContentCol1>
                 <PageContentCol2>

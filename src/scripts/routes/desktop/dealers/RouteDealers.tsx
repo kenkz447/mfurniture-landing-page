@@ -1,5 +1,6 @@
 import { RouteInfo } from 'qoobee';
 import * as React from 'react';
+import { Redirect } from 'react-router';
 import { Col, Row } from 'reactstrap';
 import styled from 'styled-components';
 
@@ -11,18 +12,30 @@ import {
     PageHeader,
     SlideUp
 } from '@/components';
+import { Img } from '@/components/domain';
 import { DEALERS_URL } from '@/configs';
-import { AppPageProps, BasePageComponent, policies } from '@/domain';
+import {
+    AppPageProps,
+    BasePageComponent,
+    markdownToHTML,
+    policies
+} from '@/domain';
 
 import { Dealers } from './containers';
 
 const DealersContent = styled.div`
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    background-image: url("/static/assets/dealers.jpg");
-    background-size: cover;
-    background-position: center;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    .cover {
+        width: auto;
+        height: 100%;
+        max-height: 100%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 `;
 
 const DealersSlider = styled.div`
@@ -34,6 +47,7 @@ const DealersSlider = styled.div`
     
     h1 {
         font-size: 55px;
+        text-align: center;
     }
 `;
 
@@ -46,22 +60,35 @@ export class RouteDealers extends BasePageComponent<AppPageProps> {
     };
 
     public render() {
+
+        const { pages } = this.context;
+
+        const dealersPage = pages.find(o => o.slug === 'dealers');
+
+        if (!dealersPage) {
+            return <Redirect to="/not-found" />;
+        }
+
         return (
             <PageContent>
                 <PageContentCol1>
                     <PageHeader />
-                    <DealersContent />
+                    <DealersContent>
+                        <Img
+                            file={dealersPage.cover}
+                            className="cover"
+                            alt="dealers cover photo"
+                        />
+                    </DealersContent>
                     <PageFooter />
                 </PageContentCol1>
                 <PageContentCol2>
                     <DealersSlider>
                         <SlideUp className="h-100 display-flex flex-direction-column justify-content-end">
-                            <h1 className="text-center mb-5">
-                                DEALERS
-                            </h1>
-                            <p className="mb-5">
-                                Please choose a city for information about possible dealers of our [M] Collection.
-                            </p>
+                            <div
+                                className="mb-5"
+                                dangerouslySetInnerHTML={{ __html: markdownToHTML(dealersPage.content) }}
+                            />
                             <Dealers />
                         </SlideUp>
                     </DealersSlider>

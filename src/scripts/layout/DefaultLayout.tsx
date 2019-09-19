@@ -18,8 +18,11 @@ export class DefaultLayout extends BaseComponent<DefaultLayoutProps, DefaultLayo
 
     public render() {
         return (
-            <PageWrapper>
-                <div className="flex-grow-1 min-height-inherit">
+            <PageWrapper className="default-layout">
+                <div
+                    id="defaultLayoutContent"
+                    className="flex-grow-1 min-height-inherit"
+                >
                     {this.props.children}
                 </div>
                 <PageSider />

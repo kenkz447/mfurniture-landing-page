@@ -60,7 +60,7 @@ interface PageSiderProps {
 
 export class PageSider extends BaseComponent<PageSiderProps> {
     public render() {
-        const { menus } = this.context;
+        const { menus, socials } = this.context;
 
         return (
             <PageSiderWrapper id="pageSider">
@@ -78,7 +78,7 @@ export class PageSider extends BaseComponent<PageSiderProps> {
                         })}
                     </ul>
                     <ul className="social-menu">
-                        {menus!.social.map(o => {
+                        {socials.map(o => {
                             return (
                                 <li key={o.url} className="social-menu-item">
                                     <NavLink to={o.url}><i className={`fa ${o.icon}`} /></NavLink>

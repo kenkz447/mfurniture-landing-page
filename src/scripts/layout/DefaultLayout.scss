@@ -1,3 +1,7 @@
 .default-layout {
     overflow: hidden;
 }
+
+#defaultLayoutContent {
+    width: calc(100% - 120px);
+}

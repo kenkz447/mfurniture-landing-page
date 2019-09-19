@@ -14,14 +14,33 @@ export class Img extends React.Component<ImgProps> {
         }
 
         const url = typeof file === 'string' ? file : file.url;
-        
+
         return FILE_HOST + url;
+    }
+
+    public readonly state = {
+        loaded: false
+    };
+
+    private readonly onLoad = () => {
+        this.setState({
+            loaded: true
+        });
     }
 
     public render() {
         const { file, ...rest } = this.props;
+        const { loaded } = this.state;
+
         const imgSrc = Img.getUploadedFileSrc(file);
 
-        return <img {...rest} src={imgSrc} />;
+        return (
+            <img
+                {...rest}
+                src={imgSrc}
+                onLoad={this.onLoad}
+                style={{ opacity: loaded ? 1 : 0 }}
+            />
+        );
     }
 }

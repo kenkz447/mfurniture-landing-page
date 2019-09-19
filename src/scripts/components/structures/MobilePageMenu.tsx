@@ -74,7 +74,7 @@ interface MobilePageMenuProps {
 
 export class MobilePageMenu extends BaseComponent<MobilePageMenuProps> {
     public render() {
-        const { menus } = this.context;
+        const { menus, socials } = this.context;
         const mobileMenu = [...menus!.header, ...menus!.sider];
 
         return (
@@ -89,7 +89,7 @@ export class MobilePageMenu extends BaseComponent<MobilePageMenuProps> {
                     })}
                 </ul>
                 <ul className="social-menu">
-                    {menus!.social.map(o => {
+                    {socials.map(o => {
                         return (
                             <li key={o.url} className="social-menu-item">
                                 <NavLink to={o.url}><i className={`fa ${o.icon}`} /></NavLink>

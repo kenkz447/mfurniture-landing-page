@@ -25,7 +25,8 @@ export const PageContent = styled.div`
 
 export const MobilePageContent = styled.div`
     position: relative;
-
+    flex-grow: 1;
+    
     &.one-column {
         #pageHeader {
             position: sticky;

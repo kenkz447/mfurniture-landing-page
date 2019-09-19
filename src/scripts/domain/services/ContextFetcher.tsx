@@ -4,7 +4,8 @@ import {
     pageResources,
     productResources,
     request,
-    settingResources
+    settingResources,
+    socialResources
 } from '@/restful';
 
 import { BaseComponent } from '../base';
@@ -29,7 +30,7 @@ export class ContextFetcher extends BaseComponent<{}, ContextFetcherState> {
     private readonly fetchContext = async () => {
         const { setContext } = this.context;
 
-        const [products, blogs, dealers, pages, settings] = await Promise.all([
+        const [products, blogs, dealers, pages, settings, socials] = await Promise.all([
             request(
                 productResources.findAll,
                 [
@@ -51,7 +52,8 @@ export class ContextFetcher extends BaseComponent<{}, ContextFetcherState> {
                 ]
             ),
             request(pageResources.findAll),
-            request(settingResources.findAll)
+            request(settingResources.findAll),
+            request(socialResources.findAll)
         ]);
 
         setContext({
@@ -59,7 +61,8 @@ export class ContextFetcher extends BaseComponent<{}, ContextFetcherState> {
             blogs,
             dealers,
             pages,
-            settings
+            settings,
+            socials
         });
 
         this.setState({
