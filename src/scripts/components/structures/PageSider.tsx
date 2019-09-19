@@ -81,7 +81,7 @@ export class PageSider extends BaseComponent<PageSiderProps> {
                         {socials.map(o => {
                             return (
                                 <li key={o.url} className="social-menu-item">
-                                    <NavLink to={o.url}><i className={`fa ${o.icon}`} /></NavLink>
+                                    <a target="_blank" href={o.url}><i className={`fa ${o.icon}`} /></a>
                                 </li>
                             );
                         })}
