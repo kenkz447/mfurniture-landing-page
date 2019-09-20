@@ -14,10 +14,6 @@ export class PageWrapper extends React.PureComponent<PageWrapperProps> {
         id: 'pageWrapper'
     };
 
-    public componentDidMount() {
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-    }
-
     public render() {
         const { ...rest } = this.props;
 

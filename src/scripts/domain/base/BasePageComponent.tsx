@@ -14,7 +14,7 @@ export class BasePageComponent<P extends AppPageProps> extends RoutePage<P> {
             routeParams: this.props.match.params
         });
 
-        window.scrollTo({
+        window.scroll({
             top: 0
         });
     }

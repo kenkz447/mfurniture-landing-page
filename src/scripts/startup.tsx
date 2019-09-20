@@ -60,7 +60,7 @@ const rootProps: RootProps = {
     AppContent: AppContent,
     initialContext: {
         policies: policies,
-        currentLanguage: localStorage.getItem('lang') || defaultLanguage,
+        currentLanguage: defaultLanguage,
         menus: {
             header: headerMenu,
             sider: siderMenu

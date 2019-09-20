@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 const MobilePageWrapperDiv = styled.div`
     min-height: 100vh;
-    height: 100vh;
     overflow: auto;
     transition: all .5s;
     position: relative;
@@ -19,10 +18,6 @@ export class MobilePageWrapper extends React.PureComponent<MobilePageWrapperProp
     public static readonly defaultProps = {
         id: 'mobilePageWrapper'
     };
-
-    public componentDidMount() {
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-    }
 
     public render() {
         const { ...rest } = this.props;

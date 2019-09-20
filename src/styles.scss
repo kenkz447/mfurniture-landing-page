@@ -13,7 +13,7 @@
 
 html {
     font-family: 'Montserrat', sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 article {
@@ -39,11 +39,6 @@ a {
 img {
     transition: all .3s;
 }
-
-#root {
-    overflow: hidden;
-}
-
 .font-AbrilFatface {
     font-family: 'Abril Fatface', cursive;
 }
