@@ -37,6 +37,8 @@ const BlogListWrapper = styled.div`
 
     .blogs-item-info {
         width: 600px;
+        min-width: 600px;
+
         &-block {
             height: 250px;
             display: flex;
