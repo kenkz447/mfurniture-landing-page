@@ -65,6 +65,14 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
         };
     }
 
+    public componentDidMount() {
+        const { dealerLocaltions } = this.context;
+
+        this.setState({
+            currentLocation: dealerLocaltions[0]
+        });
+    }
+
     public render() {
         const { dealerLocaltions } = this.context;
         const { currentLocation } = this.state;
