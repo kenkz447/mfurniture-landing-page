@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { SlideUp } from '@/components';
 import { BaseComponent } from '@/domain';
-import { Dealer } from '@/restful';
+import { DealerLocation } from '@/restful';
 
 const DealersWrapper = styled.div`
     .dealers-cities {
@@ -53,8 +53,7 @@ interface DealersProps {
 }
 
 interface DealersState {
-    readonly city: Dealer['city'];
-    readonly cities: Dealer['city'][];
+    readonly currentLocation?: DealerLocation;
 }
 
 export class Dealers extends BaseComponent<DealersProps, DealersState> {
@@ -63,26 +62,26 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
         super(props);
 
         this.state = {
-            city: 'HCM',
-            cities: ['HCM', 'DANANG', 'HANOI']
         };
     }
 
     public render() {
-        const { dealers } = this.context;
-        const { city, cities } = this.state;
+        const { dealerLocaltions } = this.context;
+        const { currentLocation } = this.state;
 
-        const dealersByCity = dealers.filter(o => o.city === city);
+        if (!currentLocation) {
+            return null;
+        }
 
         return (
             <DealersWrapper>
                 <div className="dealers-cities">
-                    {cities.map(o => {
+                    {dealerLocaltions.map(o => {
                         return (
                             <div
-                                key={o}
-                                className={this.classNames('dealers-city', { active: o === city })}
-                                onClick={() => this.setState({ city: o })}
+                                key={o.id}
+                                className={this.classNames('dealers-city', { active: o === currentLocation })}
+                                onClick={() => this.setState({ currentLocation: o })}
                             >
                                 {o}
                             </div>
@@ -90,20 +89,17 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
                     })}
                 </div>
                 <div className="dealers-list pt-5">
-                    <SlideUp key={city}>
-                        {dealersByCity.length
-                            ? dealersByCity.map(dealer => {
-                                return (
-                                    <div key={dealer.name} className="mb-5">
-                                        <div className="h5 mb-3">{dealer.name}</div>
-                                        <div>{dealer.address}</div>
-                                        <div>{dealer.email}</div>
-                                        <div>{dealer.tel}</div>
-                                    </div>
-                                );
-                            })
-                            : 'No data!'
-                        }
+                    <SlideUp key={currentLocation.id}>
+                        {currentLocation.dealers.map(dealer => {
+                            return (
+                                <div key={dealer.name} className="mb-5">
+                                    <div className="h5 mb-3">{dealer.name}</div>
+                                    <div>{dealer.address}</div>
+                                    <div>{dealer.email}</div>
+                                    <div>{dealer.tel}</div>
+                                </div>
+                            );
+                        })}
                     </SlideUp>
                 </div>
             </DealersWrapper>

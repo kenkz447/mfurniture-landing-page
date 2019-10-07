@@ -13,6 +13,9 @@
 
 html {
     font-family: 'Montserrat', sans-serif;
+}
+
+body {
     overflow-x: hidden;
 }
 
@@ -39,6 +42,7 @@ a {
 img {
     transition: all .3s;
 }
+
 .font-AbrilFatface {
     font-family: 'Abril Fatface', cursive;
 }
@@ -112,8 +116,9 @@ img {
     height: calc(100vh - 64px);
 }
 
-.carousel-control-prev, .carousel-control-next {
+.carousel-control-prev,
+.carousel-control-next {
     &.disabled {
-        opacity: .5!important;
+        opacity: .5 !important;
     }
 }

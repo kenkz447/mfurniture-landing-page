@@ -3,7 +3,15 @@ import { WithContextProps } from 'react-context-service';
 import { RouteComponentProps } from 'react-router';
 import { ModalProps } from 'reactstrap';
 
-import { Blog, Dealer, Page, Product, Setting, Social } from '@/restful';
+import {
+    Blog,
+    Dealer,
+    DealerLocation,
+    Page,
+    Product,
+    Setting,
+    Social
+} from '@/restful';
 
 import { AuthClient } from './AuthClient';
 
@@ -18,11 +26,12 @@ interface IdentyContext {
 
 interface DataContext {
     readonly products: Product[];
-    readonly dealers: Dealer[];
+    readonly dealerLocaltions: DealerLocation[];
     readonly blogs: Blog[];
     readonly pages: Page[];
     readonly settings: Setting[];
     readonly socials: Social[];
+
 }
 
 interface DomainContext extends IdentyContext, DataContext, AppCoreContext<{}> {

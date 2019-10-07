@@ -1,5 +1,6 @@
 export * from './blog';
 export * from './dealer';
+export * from './dealerLocation';
 export * from './page';
 export * from './product';
 export * from './setting';
