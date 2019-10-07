@@ -1,5 +1,6 @@
 import {
     blogResources,
+    dealerLocationResources,
     dealerResources,
     pageResources,
     productResources,
@@ -30,7 +31,7 @@ export class ContextFetcher extends BaseComponent<{}, ContextFetcherState> {
     private readonly fetchContext = async () => {
         const { setContext } = this.context;
 
-        const [products, blogs, dealers, pages, settings, socials] = await Promise.all([
+        const [products, blogs, dealerLocaltions, pages, settings, socials] = await Promise.all([
             request(
                 productResources.findAll,
                 [
@@ -46,7 +47,7 @@ export class ContextFetcher extends BaseComponent<{}, ContextFetcherState> {
                 ]
             ),
             request(
-                dealerResources.findAll,
+                dealerLocationResources.findAll,
                 [
                     { type: 'query', parameter: '_sort', value: '_id:desc' }
                 ]
@@ -59,7 +60,7 @@ export class ContextFetcher extends BaseComponent<{}, ContextFetcherState> {
         setContext({
             products,
             blogs,
-            dealers,
+            dealerLocaltions,
             pages,
             settings,
             socials

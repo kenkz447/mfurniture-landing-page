@@ -12,7 +12,7 @@ export const dealerlocationResourceType = new ResourceType<DealerLocation>({
     name: nameof<DealerLocation>()
 });
 
-export const dealerlocationResources = {
+export const dealerLocationResources = {
     findAll: new Resource<DealerLocation, DealerLocation[]>({
         resourceType: dealerlocationResourceType,
         url: '/dealerlocations'
