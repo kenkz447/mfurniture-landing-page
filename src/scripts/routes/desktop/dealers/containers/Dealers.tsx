@@ -91,7 +91,7 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
                                 className={this.classNames('dealers-city', { active: o === currentLocation })}
                                 onClick={() => this.setState({ currentLocation: o })}
                             >
-                                {o}
+                                {o.name}
                             </div>
                         );
                     })}
