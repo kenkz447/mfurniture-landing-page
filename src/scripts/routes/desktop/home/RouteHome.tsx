@@ -68,7 +68,6 @@ export class RouteHome extends BasePageComponent<AppPageProps> {
                     <PageHeader />
                     <HomeContent>
                         <SlideUp className="h-100 display-flex flex-direction-column">
-                            <div>Collection No.01</div>
                             {
                                 homePage
                                     ? (
@@ -79,35 +78,6 @@ export class RouteHome extends BasePageComponent<AppPageProps> {
                                     )
                                     : 'Not found!'
                             }
-                            <Row>
-                                <Col xs={4}>
-                                    <div><strong>01</strong></div>
-                                    <div><strong>COLLECTION</strong></div>
-                                    <p className="mb-0">
-                                        <small>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    </small>
-                                    </p>
-                                </Col>
-                                <Col xs={4}>
-                                    <div><strong>02</strong></div>
-                                    <div><strong>NEWS</strong></div>
-                                    <p className="mb-0">
-                                        <small>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    </small>
-                                    </p>
-                                </Col>
-                                <Col xs={4}>
-                                    <div><strong>03</strong></div>
-                                    <div><strong>DEALERS</strong></div>
-                                    <p className="mb-0">
-                                        <small>
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
-                                    </small>
-                                    </p>
-                                </Col>
-                            </Row>
                         </SlideUp>
                     </HomeContent>
                     <PageFooter />

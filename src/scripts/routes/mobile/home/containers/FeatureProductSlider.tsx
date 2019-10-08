@@ -231,7 +231,6 @@ export class FeatureProductSlider extends BaseComponent<FeatureProductSliderProp
                             <Img file={homePage.cover} />
                         </div>
                         <SlideUp className="h-100 display-flex flex-direction-column">
-                            <div>Collection No.01</div>
                             <div className="display-flex flex-direction-column justify-content-center flex-grow-1">
                                 <div dangerouslySetInnerHTML={{ __html: markdownToHTML(homePage.content) }} />
                             </div>

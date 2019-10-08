@@ -12,30 +12,28 @@ const MobilePageMenuWrapper = styled.div`
     transition: all .5s;
     width: 260px;
     position: fixed;
-    padding: 64px 36px 24px 0;
-    background-image: url("/static/assets/dealers.jpg");
-    background-position: center;
-    background-size: cover;
     color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    ::before {
-        content: ' ';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background: darkcyan;
-        opacity:.3;
-    }
+
     a {
         color: #fff!important;
         font-weight: 200;
         &.active {
             font-weight: 700;
         }
+    }
+
+    .mobile-menu-wrapper {
+        background-position: center;
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 64px 36px 24px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 
     .mobile-menu {
@@ -74,29 +72,37 @@ interface MobilePageMenuProps {
 
 export class MobilePageMenu extends BaseComponent<MobilePageMenuProps> {
     public render() {
-        const { menus, socials } = this.context;
+        const { menus, socials, settings } = this.context;
         const mobileMenu = [...menus!.header, ...menus!.sider];
+
+        const siderBackgroupImageSetting = settings.find(o => o.key === 'MOBILE_SIDER_IMAGE');
+
+        const backgroupImage = siderBackgroupImageSetting && siderBackgroupImageSetting.valueMedia
+            ? siderBackgroupImageSetting.valueMedia.url
+            : '/static/assets/dealers.jpg';
 
         return (
             <MobilePageMenuWrapper id="mobilePageMenu">
-                <ul className="mobile-menu">
-                    {mobileMenu.map(o => {
-                        return (
-                            <li key={o.url} className="mobile-menu-item">
-                                <NavLink to={o.url} exact={o.url === HOME_URL}>{o.label}</NavLink>
-                            </li>
-                        );
-                    })}
-                </ul>
-                <ul className="social-menu">
-                    {socials.map(o => {
-                        return (
-                            <li key={o.url} className="social-menu-item">
-                                <a target="_blank" href={o.url}><i className={`fa ${o.icon}`} /></a>
-                            </li>
-                        );
-                    })}
-                </ul>
+                <div className="mobile-menu-wrapper" style={{ backgroundImage: `url(${backgroupImage})` }}>
+                    <ul className="mobile-menu">
+                        {mobileMenu.map(o => {
+                            return (
+                                <li key={o.url} className="mobile-menu-item">
+                                    <NavLink to={o.url} exact={o.url === HOME_URL}>{o.label}</NavLink>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    <ul className="social-menu">
+                        {socials.map(o => {
+                            return (
+                                <li key={o.url} className="social-menu-item">
+                                    <a target="_blank" href={o.url}><i className={`fa ${o.icon}`} /></a>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
             </MobilePageMenuWrapper>
         );
     }

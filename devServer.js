@@ -20,8 +20,8 @@ function run(port) {
             // FILE_HOST: JSON.stringify('http://localhost:1337'),
             // API_ENTRY: JSON.stringify('http://localhost:1337'),
 
-            FILE_HOST: JSON.stringify('https://admin.mfurniture.vn'),
-            API_ENTRY: JSON.stringify('https://admin.mfurniture.vn'),
+            FILE_HOST: JSON.stringify('https://landing.mfurniture.vn'),
+            API_ENTRY: JSON.stringify('https://landing.mfurniture.vn'),
 
             SUB_ENV: JSON.stringify('dev')
         }

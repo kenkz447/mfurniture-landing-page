@@ -1,8 +1,11 @@
 import { Resource, ResourceType } from 'react-restful';
 
+import { UploadedFile } from './uploadedFile';
+
 export interface Setting {
-    readonly key: 'CONTACT_PHONE' | 'CONTACT_ADDRESS' | 'CONTACT_EMAIL';
+    readonly key: 'CONTACT_PHONE' | 'CONTACT_ADDRESS' | 'CONTACT_EMAIL' | 'MOBILE_SIDER_IMAGE';
     readonly value: string;
+    readonly valueMedia?: UploadedFile;
 }
 
 export const settingResourceType = new ResourceType<Setting>({
