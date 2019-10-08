@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { HOME_URL } from '@/configs';
 import { BaseComponent } from '@/domain';
 
+import { Img } from '../domain';
+
 const MobilePageMenuWrapper = styled.div`
     min-height: 100vh;
     height: 100vh;
@@ -78,7 +80,7 @@ export class MobilePageMenu extends BaseComponent<MobilePageMenuProps> {
         const siderBackgroupImageSetting = settings.find(o => o.key === 'MOBILE_SIDER_IMAGE');
 
         const backgroupImage = siderBackgroupImageSetting && siderBackgroupImageSetting.valueMedia
-            ? siderBackgroupImageSetting.valueMedia.url
+            ? Img.getUploadedFileSrc(siderBackgroupImageSetting.valueMedia)
             : '/static/assets/dealers.jpg';
 
         return (
