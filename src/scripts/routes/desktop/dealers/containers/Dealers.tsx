@@ -2,6 +2,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 
 import { SlideUp } from '@/components';
+import { Img } from '@/components/domain';
 import { BaseComponent } from '@/domain';
 import { DealerLocation } from '@/restful';
 
@@ -29,7 +30,6 @@ const DealersWrapper = styled.div`
     .dealers-list {
         display: flex;
         flex-direction: column;
-        background-image: url("/static/assets/dealers-background.png");
         background-size: cover;
         background-position: center;
         text-align: center;
@@ -74,12 +74,14 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
     }
 
     public render() {
-        const { dealerLocaltions } = this.context;
+        const { dealerLocaltions, settings } = this.context;
         const { currentLocation } = this.state;
 
         if (!currentLocation) {
             return null;
         }
+
+        const dealerImageSetting = settings.find(o => o.key === 'DEALERS_IMAGE');
 
         return (
             <DealersWrapper>
@@ -96,7 +98,10 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
                         );
                     })}
                 </div>
-                <div className="dealers-list pt-5">
+                <div
+                    className="dealers-list pt-5"
+                    style={{ backgroundImage: Img.getUploadedFileSrc(dealerImageSetting?.valueMedia) }}
+                >
                     <SlideUp key={currentLocation.id}>
                         {currentLocation.dealers.map(dealer => {
                             return (
