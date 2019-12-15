@@ -82,6 +82,7 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
         }
 
         const dealerImageSetting = settings.find(o => o.key === 'DEALERS_IMAGE');
+        const dealerImage = Img.getUploadedFileSrc(dealerImageSetting?.valueMedia);
 
         return (
             <DealersWrapper>
@@ -100,7 +101,7 @@ export class Dealers extends BaseComponent<DealersProps, DealersState> {
                 </div>
                 <div
                     className="dealers-list pt-5"
-                    style={{ backgroundImage: Img.getUploadedFileSrc(dealerImageSetting?.valueMedia) }}
+                    style={{ backgroundImage: `url(${dealerImage})` }}
                 >
                     <SlideUp key={currentLocation.id}>
                         {currentLocation.dealers.map(dealer => {
