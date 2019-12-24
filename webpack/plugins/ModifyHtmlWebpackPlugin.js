@@ -14,6 +14,7 @@ class ModifyHtmlWebpackPlugin {
                 return ({
                     html: html
                         .replace('<html>', `<html lang="${this.lang}">`)
+                        .replace('<title>', `<meta name="p:domain_verify" content="ac31560091f308d48fb21c3bb8e8bc2c"/><title>`)
                         .replace('<body>', `<body>\n<noscript>${this.noscriptMessage}</noscript>`)
                 });
             });
