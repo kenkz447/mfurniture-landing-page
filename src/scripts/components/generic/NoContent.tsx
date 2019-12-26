@@ -31,22 +31,21 @@ const NoContentWrapper = styled.div`
 `;
 
 interface NoContentProps {
-    readonly description: string;
     readonly title?: string;
     readonly icon?: React.ReactNode;
     readonly children?: React.ReactNode;
 }
 
 export function NoContent(props: NoContentProps) {
-    const { icon, children, description } = props;
+    const { icon, children } = props;
 
     return (
         <NoContentWrapper className="no-content">
-            NULL
+            {children}
         </NoContentWrapper>
     );
 }
 
 NoContent.defaultProps = {
-    description: 'Không tìm thấy dữ liệu!'
+    children: 'No content!'
 };

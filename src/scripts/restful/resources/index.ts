@@ -3,6 +3,7 @@ export * from './dealer';
 export * from './dealerLocation';
 export * from './page';
 export * from './product';
+export * from './productVariant';
 export * from './setting';
 export * from './social';
 export * from './uploadedFile';

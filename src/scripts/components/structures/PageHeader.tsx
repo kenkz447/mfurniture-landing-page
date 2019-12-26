@@ -15,11 +15,15 @@ const PageHeaderWrapper = styled.header`
 
     #headerMenu {
         flex-grow: 1;
-        text-align: right;
+        padding-left: 5%;
+        ul {
+            padding: 0;
+        }
     }
     .header-menu {
         margin-bottom: 0;
     }
+    
     .header-menu-item {
         display: inline-block;
         margin-right: 30px;
@@ -32,6 +36,7 @@ const PageHeaderWrapper = styled.header`
 
     .logo {
         width: 150px;
+        margin-right: 50px;
         img {
             max-width: 100%;
         }

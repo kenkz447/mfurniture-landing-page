@@ -17,10 +17,13 @@ import {
     markdownToHTML,
     policies
 } from '@/domain';
-import { replaceRoutePath } from '@/utilities';
 
-import { FeatureProductSlider } from '../../home/containers';
-import { ProductPhotoSliderSlider } from './containers';
+import {
+    ProductAttachments,
+    ProductDetails,
+    ProductPhotoSliderSlider,
+    ProductVariants
+} from './containers';
 
 const RouteCollectionDetailContent = styled.div`
     flex-grow: 1;
@@ -40,14 +43,23 @@ const RouteCollectionDetailContent = styled.div`
     h2 {
         font-size: 15px;
         font-weight: 500;
-        margin-bottom: 1em;
+        margin-bottom: .1em;
         text-transform: uppercase;
     }
 
     article {
-        padding: 0 15%;
-        margin: 30px 0;
+        margin: 30px 0 24px 0;
         text-align: justify;
+    }
+
+    .product-content-meta {
+        width: 200px;
+        min-width: 200px;
+        max-width: 200px;
+    }
+
+    .product-content-detail {
+        padding: 0 15% 0 5%;
     }
 `;
 
@@ -97,7 +109,7 @@ export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDeta
     };
 
     public render() {
-        const { products, history } = this.context;
+        const { products } = this.context;
         const { match: { params } } = this.props;
 
         const productsByType = products.filter(o => o.productType === params.productType);
@@ -118,10 +130,17 @@ export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDeta
                 <PageContentCol1>
                     <PageHeader />
                     <RouteCollectionDetailContent>
-                        <SlideUp key={currentProductIndex}>
-                            <h2 className="mt-5">{currentProduct.name}</h2>
-                            <p>By {currentProduct.by}</p>
-                            <article dangerouslySetInnerHTML={{ __html: markdownToHTML(currentProduct.content) }} />
+                        <SlideUp key={currentProductIndex} className="d-flex">
+                            <div className="product-content-meta">
+                                <h2 className="mt-5">{currentProduct.name}</h2>
+                                <p>By {currentProduct.by}</p>
+                                <ProductAttachments product={currentProduct} />
+                            </div>
+                            <div className="product-content-detail">
+                                <article dangerouslySetInnerHTML={{ __html: markdownToHTML(currentProduct.content) }} />
+                                <ProductDetails product={currentProduct} />
+                                <ProductVariants product={currentProduct} />
+                            </div>
                         </SlideUp>
                     </RouteCollectionDetailContent>
                     <PageFooter />

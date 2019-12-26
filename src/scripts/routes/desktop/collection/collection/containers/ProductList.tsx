@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Col, Container, Row } from 'reactstrap';
 import styled from 'styled-components';
 
+import { NoContent } from '@/components';
 import { Img } from '@/components/domain';
 import { COLLECTION_DETAIL_URL, NEWS_DETAIL_URL } from '@/configs';
 import { BaseComponent, markdownToHTML } from '@/domain';
@@ -91,6 +92,10 @@ export class ProductList extends BaseComponent<ProductListProps> {
         const { productType } = this.props;
 
         const filteredProducts = products.filter(o => o.productType === productType);
+
+        if (!filteredProducts.length) {
+            return <NoContent />;
+        }
 
         return (
             <ProductListWrapper>

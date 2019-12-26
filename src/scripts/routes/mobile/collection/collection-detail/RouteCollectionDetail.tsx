@@ -11,7 +11,10 @@ import {
     policies
 } from '@/domain';
 import {
-    ProductPhotoSliderSlider
+    ProductAttachments,
+    ProductDetails,
+    ProductPhotoSliderSlider,
+    ProductVariants
 } from '@/routes/desktop/collection/collection-detail/containers';
 
 const RouteCollectionDetailContent = styled.div`
@@ -41,6 +44,7 @@ const RouteCollectionDetailContent = styled.div`
 
     article {
         text-align: justify;
+        padding: 30px 0 24px 0;
     }
 `;
 
@@ -85,9 +89,14 @@ export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDeta
                 </RouteCollectionDetailSlider>
                 <RouteCollectionDetailContent>
                     <SlideUp key={currentProductIndex}>
-                        <h2>{currentProduct.name}</h2>
-                        <p>By {currentProduct.by}</p>
-                        <article dangerouslySetInnerHTML={{ __html: markdownToHTML(currentProduct.content) }} />
+                        <div>
+                            <h2>{currentProduct.name}</h2>
+                            <p>By {currentProduct.by}</p>
+                            <article dangerouslySetInnerHTML={{ __html: markdownToHTML(currentProduct.content) }} />
+                        </div>
+                        <ProductDetails product={currentProduct}/>
+                        <ProductVariants product={currentProduct} />
+                        <ProductAttachments product={currentProduct}  />
                     </SlideUp>
                 </RouteCollectionDetailContent>
             </MobilePageContent>

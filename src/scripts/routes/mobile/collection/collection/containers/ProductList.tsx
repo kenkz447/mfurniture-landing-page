@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { NoContent } from '@/components';
 import { Img } from '@/components/domain';
 import { COLLECTION_DETAIL_URL } from '@/configs';
 import { BaseComponent } from '@/domain';
@@ -67,7 +68,10 @@ export class ProductList extends BaseComponent<ProductListProps> {
         const { productType } = this.props;
 
         const filteredProducts = products.filter(o => o.productType === productType);
-
+        if (!filteredProducts.length) {
+            return <NoContent />;
+        }
+        
         return (
             <ProductListWrapper>
                 {filteredProducts.map(product => {

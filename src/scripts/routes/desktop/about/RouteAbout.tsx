@@ -81,7 +81,7 @@ export class RouteAbout extends BasePageComponent<AppPageProps> {
                 </PageContentCol1>
                 <PageContentCol2>
                     <AboutSlider>
-                        <SlideUp className="h-100 display-flex flex-direction-column justify-content-end">
+                        <SlideUp className="h-100 display-flex flex-direction-column justify-content-center">
                             {
                                 aboutPage
                                     ? (

@@ -1,5 +1,6 @@
 import { Resource, ResourceType } from 'react-restful';
 
+import { ProductVariant } from './productVariant';
 import { UploadedFile } from './uploadedFile';
 
 export interface Product {
@@ -14,6 +15,9 @@ export interface Product {
     readonly productType: 'sofa' | 'chair' | 'table';
     readonly isFeature: boolean;
     readonly photos: UploadedFile[];
+    readonly productVariants: ProductVariant[];
+    readonly attachments: UploadedFile[];
+    readonly details: object;
 }
 
 export const productResourceType = new ResourceType<Product>({
