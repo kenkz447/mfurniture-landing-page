@@ -36,6 +36,7 @@ interface ProductVariantsState {
 
 interface ProductVariantsProps {
     readonly product: Product;
+    readonly onVariantChange: (variant: ProductVariant) => void;
 }
 
 export class ProductVariants extends React.PureComponent<ProductVariantsProps, ProductVariantsState> {
@@ -66,6 +67,8 @@ export class ProductVariants extends React.PureComponent<ProductVariantsProps, P
                                         this.setState({
                                             activeVariant: o
                                         });
+
+                                        this.props.onVariantChange(o);
                                     }}
                                 >
                                     <Img file={o.materialPrimary.texture} />
@@ -85,9 +88,7 @@ export class ProductVariants extends React.PureComponent<ProductVariantsProps, P
                         {activeVariant.materialSecondaries.map(o => {
                             return (
                                 <div key={o.id} className="variant">
-                                    <div
-                                        className="variant-image"
-                                    >
+                                    <div className="variant-image" >
                                         <Img file={o.texture} />
                                     </div>
                                     <small>

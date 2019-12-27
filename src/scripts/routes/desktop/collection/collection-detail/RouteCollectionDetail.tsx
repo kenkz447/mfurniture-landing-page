@@ -17,6 +17,7 @@ import {
     markdownToHTML,
     policies
 } from '@/domain';
+import { ProductVariant } from '@/restful';
 
 import {
     ProductAttachments,
@@ -98,15 +99,29 @@ const Blackbar = styled.div`
     transform: translateX(-50%);
 `;
 
+interface RouteCollectionDetailState {
+    readonly activeVariant?: ProductVariant;
+}
+
 type RouteCollectionDetailProps = AppPageProps<{ readonly productType: string; readonly slug?: string }>;
 
-export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDetailProps> {
+export class RouteCollectionDetail extends BasePageComponent<
+    RouteCollectionDetailProps,
+    RouteCollectionDetailState
+    > {
     public static readonly routeInfo: RouteInfo = {
         path: COLLECTION_DETAIL_URL,
         title: 'Collection',
         exact: true,
         policies: [policies.locationAllowed]
     };
+
+    constructor(props: RouteCollectionDetailProps) {
+        super(props);
+
+        this.state = {
+        };
+    }
 
     public render() {
         const { products } = this.context;
@@ -139,7 +154,10 @@ export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDeta
                             <div className="product-content-detail">
                                 <article dangerouslySetInnerHTML={{ __html: markdownToHTML(currentProduct.content) }} />
                                 <ProductDetails product={currentProduct} />
-                                <ProductVariants product={currentProduct} />
+                                <ProductVariants
+                                    product={currentProduct}
+                                    onVariantChange={(activeVariant) => this.setState({ activeVariant })}
+                                />
                             </div>
                         </SlideUp>
                     </RouteCollectionDetailContent>
@@ -148,7 +166,9 @@ export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDeta
                 <PageContentCol2>
                     <RouteCollectionDetailSlider>
                         <ProductPhotoSliderSlider
+                            key={this.state.activeVariant?.id}
                             product={currentProduct}
+                            activeVariant={this.state.activeVariant}
                         />
                         <Blackbar />
                     </RouteCollectionDetailSlider>

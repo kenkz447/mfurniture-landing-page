@@ -3,7 +3,7 @@ import { Carousel, CarouselControl, CarouselItem } from 'reactstrap';
 import styled from 'styled-components';
 
 import { Img } from '@/components/domain';
-import { Product } from '@/restful';
+import { Product, ProductVariant, UploadedFile } from '@/restful';
 
 const ProductPhotoSliderSliderWrapper = styled.div`
     height: inherit;
@@ -88,11 +88,13 @@ const ProductPhotoSliderSliderWrapper = styled.div`
 
 interface ProductPhotoSliderSliderProps {
     readonly product: Product;
+    readonly activeVariant?: ProductVariant;
     readonly onChange?: (index: number) => void;
 }
 
 interface ProductPhotoSliderSliderState {
     readonly activeIndex: number;
+    readonly photos: UploadedFile[];
 }
 
 export class ProductPhotoSliderSlider extends React.PureComponent<
@@ -102,9 +104,14 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
 
     constructor(props: ProductPhotoSliderSliderProps) {
         super(props);
-
+        const { product, activeVariant } = props;
+        const photos = activeVariant?.photos?.length
+            ? activeVariant?.photos
+            : product.photos;
+        
         this.state = {
-            activeIndex: 0
+            activeIndex: 0,
+            photos
         };
     }
 
@@ -117,26 +124,25 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
     }
 
     private readonly next = () => {
-        const { product } = this.props;
-        const { activeIndex } = this.state;
+        const { activeIndex, photos } = this.state;
 
-        if (this._animating || activeIndex === product.photos.length - 1) {
+        if (this._animating || activeIndex === photos.length - 1) {
             return;
         }
 
-        const nextIndex = this.state.activeIndex === product.photos.length - 1 ? 0 : this.state.activeIndex + 1;
+        const nextIndex = this.state.activeIndex === photos.length - 1 ? 0 : this.state.activeIndex + 1;
         this.setState({ activeIndex: nextIndex });
     }
 
     private readonly previous = () => {
         const { product } = this.props;
-        const { activeIndex } = this.state;
+        const { activeIndex, photos } = this.state;
 
         if (this._animating || activeIndex === 0) {
             return;
         }
 
-        const nextIndex = this.state.activeIndex === 0 ? product.photos.length - 1 : this.state.activeIndex - 1;
+        const nextIndex = this.state.activeIndex === 0 ? photos.length - 1 : activeIndex - 1;
         this.setState({ activeIndex: nextIndex });
     }
 
@@ -153,11 +159,10 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
 
     public render() {
         const { product } = this.props;
-        const { activeIndex } = this.state;
+        const { activeIndex, photos } = this.state;
 
         const displayIndex = activeIndex + 1;
-
-        const slides = product.photos.map((photo) => {
+        const slides = photos.map((photo) => {
             return (
                 <CarouselItem
                     onExiting={this.onExiting}
@@ -172,6 +177,7 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
         return (
             <ProductPhotoSliderSliderWrapper>
                 <Carousel
+                    key={photos.length}
                     activeIndex={activeIndex}
                     next={this.next}
                     previous={this.previous}
@@ -188,7 +194,7 @@ export class ProductPhotoSliderSlider extends React.PureComponent<
                         direction="next"
                         directionText="Next"
                         onClickHandler={this.next}
-                        className={displayIndex === product.photos.length ? 'disabled' : ''}
+                        className={displayIndex === photos.length ? 'disabled' : ''}
                     />
                 </Carousel>
                 <div className="carousel-caption">

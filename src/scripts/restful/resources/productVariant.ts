@@ -1,4 +1,5 @@
 import { Material } from './material';
+import { UploadedFile } from './uploadedFile';
 
 export interface ProductVariant {
     readonly id: string;
@@ -6,4 +7,5 @@ export interface ProductVariant {
     readonly materialPrimary: Material;
     readonly materialSecondariesLabel: string;
     readonly materialSecondaries: Material[];
+    readonly photos: UploadedFile[];
 }

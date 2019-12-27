@@ -35,7 +35,7 @@ export class ProductAttachments extends React.PureComponent<ProductAttachmentsPr
                     {product.attachments.map(o => {
                         return (
                             <div key={o.url} className="Attachment">
-                                <a href={Img.getUploadedFileSrc(o.url)}>
+                                <a href={Img.getUploadedFileSrc(o.url)} target="_blank">
                                     {o.name}
                                </a>
                             </div>

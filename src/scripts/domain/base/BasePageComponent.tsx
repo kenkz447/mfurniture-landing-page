@@ -2,7 +2,7 @@ import { RootContext, RoutePage } from 'qoobee';
 
 import { AppPageProps, WithDomainContext } from './Types';
 
-export class BasePageComponent<P extends AppPageProps> extends RoutePage<P> {
+export class BasePageComponent<P extends AppPageProps, S = {}> extends RoutePage<P, S> {
 
     public static readonly contextType = RootContext;
     public readonly context!: WithDomainContext;
