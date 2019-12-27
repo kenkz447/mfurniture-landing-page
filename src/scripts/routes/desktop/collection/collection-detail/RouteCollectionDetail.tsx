@@ -99,7 +99,7 @@ const Blackbar = styled.div`
     transform: translateX(-50%);
 `;
 
-interface RouteCollectionDetailState {
+export interface RouteCollectionDetailState {
     readonly activeVariant?: ProductVariant;
 }
 

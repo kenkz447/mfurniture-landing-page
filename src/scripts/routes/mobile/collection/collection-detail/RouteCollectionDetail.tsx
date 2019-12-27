@@ -16,6 +16,9 @@ import {
     ProductPhotoSliderSlider,
     ProductVariants
 } from '@/routes/desktop/collection/collection-detail/containers';
+import {
+    RouteCollectionDetailState
+} from '@/routes/desktop/collection/collection-detail/RouteCollectionDetail';
 
 const RouteCollectionDetailContent = styled.div`
     flex-grow: 1;
@@ -55,13 +58,23 @@ const RouteCollectionDetailSlider = styled.div`
 
 type RouteCollectionDetailProps = AppPageProps<{ readonly productType: string; readonly slug?: string }>;
 
-export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDetailProps> {
+export class RouteCollectionDetail extends BasePageComponent<
+    RouteCollectionDetailProps,
+    RouteCollectionDetailState
+    > {
     public static readonly routeInfo: RouteInfo = {
         path: COLLECTION_DETAIL_URL,
         title: 'Collection',
         exact: true,
         policies: [policies.locationAllowed]
     };
+
+    constructor(props: RouteCollectionDetailProps) {
+        super(props);
+
+        this.state = {
+        };
+    }
 
     public render() {
         const { products } = this.context;
@@ -84,7 +97,9 @@ export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDeta
             <MobilePageContent>
                 <RouteCollectionDetailSlider className="mobile-content-full-screen">
                     <ProductPhotoSliderSlider
+                        key={this.state.activeVariant?.id}
                         product={currentProduct}
+                        activeVariant={this.state.activeVariant}
                     />
                 </RouteCollectionDetailSlider>
                 <RouteCollectionDetailContent>
@@ -94,9 +109,14 @@ export class RouteCollectionDetail extends BasePageComponent<RouteCollectionDeta
                             <p>By {currentProduct.by}</p>
                             <article dangerouslySetInnerHTML={{ __html: markdownToHTML(currentProduct.content) }} />
                         </div>
-                        <ProductDetails product={currentProduct}/>
-                        <ProductVariants product={currentProduct} />
-                        <ProductAttachments product={currentProduct}  />
+                        <ProductDetails product={currentProduct} />
+                        <ProductVariants
+                            product={currentProduct}
+                            onVariantChange={(activeVariant) => this.setState({ activeVariant })}
+                        />
+                        <ProductAttachments
+                            product={currentProduct}
+                        />
                     </SlideUp>
                 </RouteCollectionDetailContent>
             </MobilePageContent>
